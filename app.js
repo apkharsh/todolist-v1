@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-
-var names=[];
+var items = [];
+// var newListItems=[];
 
 app.get("/", function (req, res) {
     // res.send('Hello World!');
@@ -43,14 +43,15 @@ app.get("/", function (req, res) {
     var todayTask = Math.floor(Math.random() * (tasks.length));
     var task = tasks[todayTask];
 
-    res.render("list", { kindOfDay: day, work: task, nameList: names });
+    res.render("list", { kindOfDay: day, work: task, newListItems: items });
     
 });
 
-app.post('/', function (req, res) {
-    var name = req.body.name;
+app.post("/", function (req, res) {
+    var item = req.body.newItem;
     //pushing items to array with each post request
-    names.push(name);
+    items.push(item);
+    // names.push();
     // console.log(name);
     // redirecting to root and root will render the list.ejs
     res.redirect("/");
