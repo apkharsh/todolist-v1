@@ -1,19 +1,61 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-app.use('view engine', 'ejs');
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function(req, res) {
+var names=[];
+
+app.get("/", function (req, res) {
     // res.send('Hello World!');
     var today = new Date();
-    if(today.getDay() === 4){
-        res.send('Today is Thursday!');
+    var currentDay = today.getDay();
+    var day = "";
+    switch (currentDay) {
+        case 0:
+            day = "Sunday";
+            break;
+        case 1:
+            day = "Monday";
+            break;
+        case 2:
+            day = "Tuesday";
+            break;
+        case 3:
+            day = "Wednesday";
+            break;
+        case 4:
+            day = "Thursday";
+            break;
+        case 5:
+            day = "Friday";
+            break;
+        case 6:
+            day = "Saturday";
+            break;
+        default:
+            day = "Invalid Day";
     }
-    else{
-        res.send('Today is not Thursday!');
-    }
+    // console.log(day);
+
+    var tasks = ["gay","playing","working","gaming","sleeping","eating","jogging","reading","watching","swimming","walking"];
+
+    var todayTask = Math.floor(Math.random() * (tasks.length));
+    var task = tasks[todayTask];
+
+    res.render("list", { kindOfDay: day, work: task, nameList: names });
+    
 });
 
-app.listen(3000, function() {
-    console.log('Example app listening on port 3000!');
+app.post('/', function (req, res) {
+    var name = req.body.name;
+    //pushing items to array with each post request
+    names.push(name);
+    // console.log(name);
+    // redirecting to root and root will render the list.ejs
+    res.redirect("/");
+});
+
+app.listen(3000, function () {
+    console.log("Example app listening on port 3000!");
 });
