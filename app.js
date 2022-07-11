@@ -39,7 +39,6 @@ app.get("/", function (req, res) {
     // console.log(day);
 
     var tasks = ["gay","playing","working","gaming","sleeping","eating","jogging","reading","watching","swimming","walking"];
-
     var todayTask = Math.floor(Math.random() * (tasks.length));
     var task = tasks[todayTask];
 
@@ -57,6 +56,6 @@ app.post("/", function (req, res) {
     res.redirect("/");
 });
 
-app.listen(3000, function () {
-    console.log("Example app listening on port 3000!");
+app.listen(6969, function () {
+    console.log("Example app listening on port 6969!");
 });
