@@ -10,26 +10,30 @@
 </head>
 
 <body>
-    <h1>Today is <%= kindOfDay %>
-    </h1>
-    <p>Why are you not <%= work %>
-    </p>
-    <ul>
-        <li>harsh</li>
-        <li>girish</li>
-        <li>krish</li>
-        <li>kush</li>
+    <div class="box" id="heading">
+        <h1>Today is <%= kindOfDay %></h1>
+        <p>Why are you not <%= work %></p>
+    </div>
+    
+    <div class="box">
         <% for(var i=0; i<newListItems.length; i++){ %>
-            <li>
-                <%=newListItems[i] %>
-            </li>
+            <div class="item">
+                <input type="checkbox" name="" id="">
+                <p><%=newListItems[i] %></p>
+            </div>
         <% } %>
-    </ul>
 
-    <form action="/" method="post">
-        <input type="text" name="newItem" placeholder="Name">
-        <input type="submit" value="Submit">
-    </form>
+
+        <form action="/" class="item" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="button" value="Submit">+</button>
+        </form>
+    </div>
+
+        
+
+
+    
 
 </body>
 
