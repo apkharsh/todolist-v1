@@ -1,39 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { getDate } = require("./date");
 const app = express();
+const date = require(__dirname + "/date.js");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 var items = [];
 var workItems = [];
-var today = new Date();
-var currentDay = today.getDay();
-var day = "";
-switch (currentDay) {
-    case 0:
-        day = "Sunday";
-        break;
-    case 1:
-        day = "Monday";
-        break;
-    case 2:
-        day = "Tuesday";
-        break;
-    case 3:
-        day = "Wednesday";
-        break;
-    case 4:
-        day = "Thursday";
-        break;
-    case 5:
-        day = "Friday";
-        break;
-    case 6:
-        day = "Saturday";
-        break;
-    default:
-        day = "Invalid Day";
-}
+var today = date.getDate();
+var day = date.getDay();
 
 // var tasks = ["gay", "not gay"];
 // var todayTask = Math.floor(Math.random() * tasks.length);
@@ -46,7 +23,7 @@ app.get("/", function (req, res) {
 
     // var tasks = ["gay","playing","working","gaming","sleeping","eating","jogging","reading","watching","swimming","walking"];
 
-    res.render("list", { listTitle: day, newListItems: items });
+    res.render("list", { listTitle: today, newListItems: items });
 });
 
 app.get("/work", function (req, res) {
